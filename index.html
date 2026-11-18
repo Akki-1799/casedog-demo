@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CaseDog (demo)</title>
+<link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">🐶</span><b>CaseDog</b><span class="muted">Support console</span></div>
+  <div class="top-right">
+    <span class="pill ok">● Bridge connected</span>
+    <div class="mcp" id="mcp">
+      <button class="btn mcp-trigger" id="mcp-trigger">MCPs <span id="mcp-count"></span> ▾</button>
+      <div class="mcp-menu" id="mcp-menu" hidden>
+        <ul id="mcp-list"></ul>
+        <button class="btn primary mcp-all" id="mcp-all">Connect all</button>
+      </div>
+    </div>
+    <button class="pill accent" data-toast="You're on the latest preview build (v2.3.1).">v2.3.1 · update</button>
+    <button class="icon" title="Settings" data-menu="settings">⚙</button>
+    <button class="icon" title="What's new" data-toast="✦ New: Replicate menu and Dossier findings.">✦</button>
+    <button class="icon" title="Toggle theme" id="theme-toggle">☾</button>
+    <button class="icon" title="More" data-menu="more">⋯</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="link hide-filters" id="hide-filters">⇤ Hide filters</button>
+    <div class="side-body">
+      <input id="search" class="search" placeholder="Search ID or subject...">
+      <p class="section">SAVED VIEWS</p>
+      <div class="views" id="views"></div>
+      <div class="filter-bar"><span id="active-count" class="muted">No filters</span>
+        <button class="link" id="clear-filters">Clear filters</button></div>
+      <div id="filters"></div>
+      <p class="section">BY STATUS</p>
+      <div id="status-list"></div>
+      <div id="toolkit"></div>
+      <p class="section">RECENT CASES</p>
+      <ul class="recent" id="recent"><li class="muted">None yet</li></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="ticket-head">
+      <div><span class="muted" id="head-label">Select a ticket from the list</span> <a id="head-id"></a> <span class="subject" id="head-subject"></span>
+        <span id="head-tags"></span></div>
+      <div><button class="btn" data-toast="Opening ticket in Zendesk… (demo)">Zendesk ↗</button>
+        <button class="btn" data-toast="Repro workspace opened. (demo)">Workspace</button></div>
+    </div>
+    <div class="conversation" id="conversation">
+      <h2 class="queue-title">Your queue <small class="muted"><span id="open-count">6 open</span>. Click a row for details, or a skill cell to jump to it.</small></h2>
+      <div class="queue-card">
+        <table class="queue">
+          <thead><tr><th></th><th>Priority</th><th>Case</th><th>Triage</th><th>Investigate</th><th>Reply</th><th>Repro</th><th>Resolution</th><th class="next">Next step</th></tr></thead>
+          <tbody id="queue-body"></tbody>
+        </table>
+      </div>
+      <div id="thread"></div>
+    </div>
+
+    <div class="status-row">
+      <span class="muted">Answering with</span> <span class="tag accent">Claude Opus 4.8</span>
+      <span class="tag ok">Repro workspace: on</span>
+      <button class="tag" data-toast="Opened repro folder ~/casedog/repro-3063814 (demo)">Open folder</button>
+      <button class="tag" data-menu="dossier">Dossier · 1 findings</button>
+      <span class="muted right" id="turns">1 turn · $0</span>
+    </div>
+    <div class="composer">
+      <textarea id="input" placeholder="Message about this ticket... (Enter to send · type / for a skill)"></textarea>
+      <div class="composer-row"><div>
+        <button class="tag" data-menu="mode" id="mode-chip">Assistant ▾</button>
+        <button class="tag accent-fill" data-menu="max">+ Max mode ▾</button>
+        <button class="link" data-toast="Attach a file (demo).">📎</button>
+        <button class="link" id="rephrase">Rephrase</button></div>
+        <button class="send" id="send">↑</button></div>
+    </div>
+  </main>
+</div>
+<div class="dropdown" id="dropdown" hidden></div>
+<div class="toast" id="toast" hidden></div>
+<script src="mcp.js?v=6"></script>
+<script src="app.js?v=6"></script>
+</body>
+</html>
